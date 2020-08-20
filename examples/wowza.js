@@ -10,8 +10,8 @@ const { RTSPClient, H264Transport, AACTransport } = require("../dist");
 const fs = require("fs");
 
 // User-specified details here.
-const url = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
-const filename = "bigbuckbunny";
+const url = "rtsp://192.168.199.229/1";
+const filename = "camera";
 const username = "";
 const password = "";
 
@@ -21,8 +21,8 @@ const client = new RTSPClient(username, password);
 // Step 2: Connect to a specified URL using the client instance.
 //
 // "keepAlive" option is set to true by default
-// "connection" option is set to "udp" by default. 
-client.connect(url, { connection: "udp" })
+// "connection" option is set to "udp" by default.
+client.connect(url, { connection: "tcp" })
   .then((detailsArray) => {
     console.log("Connected");
 
@@ -32,10 +32,10 @@ client.connect(url, { connection: "udp" })
 
       // Step 3: Open the output file
       if (details.codec == "H264") {
-        const videoFile = fs.createWriteStream(filename + '.264');
+        // const videoFile = fs.createWriteStream(filename + '.264');
         // Step 4: Create H264Transport passing in the client, file, and details
         // This class subscribes to the 'data' event, looking for the video payload
-        const h264 = new H264Transport(client, videoFile, details);
+        // const h264 = new H264Transport(client, videoFile, details);
       }
       if (details.codec == "AAC") {
         const audioFile = fs.createWriteStream(filename + '.aac');
@@ -50,9 +50,14 @@ client.connect(url, { connection: "udp" })
   })
   .catch(e => console.log(e));
 
+// let i = 0
 // The "data" event is fired for every RTP packet.
 client.on("data", (channel, data, packet) => {
-  console.log("RTP:", "Channel=" + channel, "TYPE=" + packet.payloadType, "ID=" + packet.id, "TS=" + packet.timestamp, "M=" + packet.marker);
+  // todo: 这儿有巨大的性能问题，我查到每s有200次call
+  // i++
+  // console.log(i++)
+  console.log(data)
+  // console.log("RTP:", "Channel=" + channel, "TYPE=" + packet.payloadType, "ID=" + packet.id, "TS=" + packet.timestamp, "M=" + packet.marker);
 });
 
 // The "controlData" event is fired for every RTCP packet.
