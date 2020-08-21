@@ -33,7 +33,7 @@ ___
 
 **● packetType**: *`number`*
 
-*Defined in [util.ts:32](https://github.com/mbullington/yellowstone/blob/c6fe1af/lib/util.ts#L32)*
+*Defined in [util.ts:32](https://githttps://github.com/mbullington/yellowstone/blob/c6fe1af/lib/util.ts#L32hub.com/mbullington/yellowstone/blob/c6fe1af/lib/util.ts#L32)*
 
 ___
 <a id="timestamp"></a>

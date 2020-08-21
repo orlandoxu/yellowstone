@@ -10,7 +10,7 @@ const { RTSPClient, H264Transport, AACTransport } = require("../dist");
 const fs = require("fs");
 
 // User-specified details here.
-const url = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+const url = "rtsp://127.0.0.1/test";
 const filename = "bigbuckbunny";
 const username = "";
 const password = "";
@@ -21,8 +21,8 @@ const client = new RTSPClient(username, password);
 // Step 2: Connect to a specified URL using the client instance.
 //
 // "keepAlive" option is set to true by default
-// "connection" option is set to "udp" by default. 
-client.connect(url, { connection: "udp" })
+// "connection" option is set to "udp" by default.
+client.connect(url, { connection: "tcp" })
   .then((detailsArray) => {
     console.log("Connected");
 

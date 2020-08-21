@@ -21,6 +21,7 @@ function parseRTPPacket(buffer) {
 exports.parseRTPPacket = parseRTPPacket;
 function parseRTCPPacket(buffer) {
     const packetType = buffer[1];
+    console.log('reading!!!')
     const timestamp = buffer.readUInt32BE(16);
     return {
         timestamp,
