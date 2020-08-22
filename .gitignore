@@ -1,4 +1,6 @@
 # Logs
+.idea
+*.h264
 logs
 *.log
 

@@ -408,10 +408,11 @@ class RTSPClient extends events_1.EventEmitter {
                         this.emit("data", packetChannel, packet.payload, packet);
                     }
                     if ((packetChannel & 0x01) === 1) { // odd number
-                        const packet = util_1.parseRTCPPacket(this.rtspPacket);
-                        this.emit("controlData", packetChannel, packet);
-                        const receiver_report = this._emptyReceiverReport();
-                        this._sendInterleavedData(packetChannel, receiver_report);
+                      // orlando add here, 有bug，会崩溃
+                        // const packet = util_1.parseRTCPPacket(this.rtspPacket);
+                        // this.emit("controlData", packetChannel, packet);
+                        // const receiver_report = this._emptyReceiverReport();
+                        // this._sendInterleavedData(packetChannel, receiver_report);
                     }
                     this.readState = ReadStates.SEARCHING;
                 }
